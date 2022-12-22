@@ -1,0 +1,86 @@
+/*programma che permetta di inserire un nuovo studente nella lista degli studenti universitari, 
+ * in modo che tale lista semplicemente concatenata sia ordinata rispetto al numero di matricola*/
+ 
+#include <stdio.h>
+#include <stdlib.h>
+
+struct studente
+{
+      char nome [30];
+      char cognome [30];
+      int matricola;
+      struct studente *next;
+};
+typedef struct studente studente;
+
+studente* inserisci (studente *head, studente *p)
+{
+	studente *r = head, *q = head; /* predecessore e successore del nuovo elemento*/ 
+	while ((q != NULL) && (q->matricola < p->matricola))
+	{
+	       r = q;
+	       q = q->next;
+	}
+	if (q == head) /*l'elemento si deve inserire in testa alla lista*/
+	{
+              p->next = head;
+	       head = p;
+	}
+else
+	   {
+		if (q == NULL) /*l'elemento si deve inserire alla fine della lista*/
+		{
+		        r->next = p;
+		        p->next = NULL;
+		}
+		else
+		{
+		         r->next = p;
+		         p->next = q;
+		}
+	}
+	return (head); /*per modificare il puntatore alla lista quando viene inserito il primo elemento*/
+}
+
+void stampa(studente* head)
+{
+	studente* temp = head;
+	while (temp != NULL)
+	{
+		printf("\n%s, %s, %d", temp->nome, temp->cognome, temp->matricola);
+		temp = temp->next;
+	}
+}	 
+
+int main(int argc, char* argv[])
+{
+	studente *p;
+	studente *head = NULL;
+    char scelta; 
+    printf("vuoi inserire un nuovo studente?(y/n)");
+    scanf("%c", &scelta);
+    while(scelta=='y')
+    {
+        /*inseriamo i dati di un nuovo utente*/
+        p= (studente *) malloc(sizeof(studente));
+        if (p == NULL)
+            printf("\n\aImpossibile allocare nuovo spazio");
+        else
+        {
+            printf("Nome : ");
+            scanf("%s",p->nome);
+            printf("Cognome : ");
+            scanf("%s",p->cognome);
+            printf("Matricola : ");
+            scanf("%d",&(p->matricola));
+            /* inseriamo l’elemento nella lista*/
+            head = inserisci (head,p);
+        }
+        /* stampiamo la lista*/
+        fflush(stdin);
+        stampa(head);
+        printf("\nvuoi inserire un altro studente?(y/n)");
+        scanf("%c", &scelta);
+    }
+	return 0;
+}	
