@@ -19,7 +19,7 @@ studente* inserisci (studente *head, studente *p)
 	while ((q != NULL) && (q->matricola < p->matricola))
 	{
 	       r = q;
-	       q = q->next;
+	       q = q->next;	//in buona sostanza il puntatore si muove soltanto
 	}
 	if (q == head) /*l'elemento si deve inserire in testa alla lista*/
 	{
@@ -36,7 +36,7 @@ else
 		else
 		{
 		         r->next = p;
-		         p->next = q;
+		         p->next = q;	//lelemento si inserisce nel mezzo
 		}
 	}
 	return (head); /*per modificare il puntatore alla lista quando viene inserito il primo elemento*/
