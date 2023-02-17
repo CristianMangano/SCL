@@ -12,14 +12,6 @@ struct Nodo
     struct Nodo* next;
 };
 
-//-------------------------------
-struct atom
-{
-    int data, nome, anno;
-};
-typedef struct atom Atom;   // significa: definisci un nuovo tipo di dato Atom, che fa riferimento alla struttura atom
-//---------------------------------
-
 struct Nodo* inserisci(struct Nodo* head, struct Nodo* p) {
     if (head == NULL)
     {
@@ -99,6 +91,5 @@ void main(void) {
     }
     stampa(head);
     head = pulisciLista(head);
-    printf("helloworld\n");
     stampa(head);
 }
