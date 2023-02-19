@@ -1,3 +1,5 @@
+/* Una lista di studenti ordinata */
+
 #include <stdio.h>
 #include <stdlib.h>
 
