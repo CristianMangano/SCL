@@ -20,11 +20,14 @@ void stampacrescente(nodo* head) {
     int temp;
     for (nodo* prec = head; prec != NULL; prec = prec->next)
     {
-        if ((prec->next != NULL) && (prec->data > prec->next->data))
+        for (nodo* succ = prec->next; succ != NULL; succ = succ->next)
         {
-            temp = prec->data;
-            prec->data = prec->next->data;
-            prec->next->data = temp;
+            if ((succ != NULL) && (prec->data > succ->data))
+            {
+                temp = prec->data;
+                prec->data = succ->data;
+                succ->data = temp;
+            }
         }
     }
     puts("stampa ordinata...");
